@@ -1,23 +1,28 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Searchbar.module.css';
 
-const Searchbar = ({ onSubmit }) => {
-    const inputRef = useRef();
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      onSubmit(inputRef.current.value);
-    };
-  
+class Searchbar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.onSubmit(this.inputRef.current.value);
+  }
+
+  render() {
     return (
       <header className={styles.searchbar}>
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={this.handleSubmit}>
           <button type="submit" className={styles.button}>
             <span className={styles.buttonLabel}>Search</span>
           </button>
           <input
-            ref={inputRef}
+            ref={this.inputRef}
             className={styles.input}
             type="text"
             autoComplete="off"
@@ -27,7 +32,8 @@ const Searchbar = ({ onSubmit }) => {
         </form>
       </header>
     );
-  };
+  }
+}
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,

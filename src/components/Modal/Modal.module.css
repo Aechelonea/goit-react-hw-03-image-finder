@@ -15,10 +15,17 @@
   max-width: 80%;
   max-height: 80%;
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
 }
 
 .modal img {
-  width: 100%;
+  max-height: 75vh;
+  max-width: 100%;
+  width: auto;
   height: auto;
   border-radius: 4px;
+  object-fit: contain;
 }
